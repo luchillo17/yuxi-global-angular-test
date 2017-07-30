@@ -5,7 +5,7 @@ import {
   ConfigService,
   TeamChallengeService,
   UserChallengeService,
-} from './services';
+} from '.';
 
 @NgModule({
   imports: [
