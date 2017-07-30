@@ -1,19 +1,28 @@
-import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
+import {
+  DashboardModule,
+  ChallengesModule,
+  AppStoreModule,
+} from '.';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule
+
+    SharedModule,
+    AppStoreModule,
+    DashboardModule,
+    ChallengesModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
