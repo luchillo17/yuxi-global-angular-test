@@ -1,7 +1,15 @@
 interface ListStateByNumber<T> {
-  [key: number]: T;
+  [key: number]: T
 }
 
 interface ListStateByString<T> {
-  [key: string]: T;
+  [key: string]: T
+}
+
+// App specific
+interface ChallengeInstructions {
+  presentationId: null
+  challengeId: number
+  order: number
+  text: string
 }
