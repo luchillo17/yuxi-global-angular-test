@@ -23,7 +23,7 @@ export class AddTeamChallengesAction implements Action {
 
 export class LoadTeamChallengesAction implements Action {
   public readonly type = LOAD_TEAM_CHALLENGES;
-  constructor(public payload: TeamChallenge[]) {}
+  constructor() {}
 }
 
 export class LoadTeamChallengesSuccessAction implements Action {

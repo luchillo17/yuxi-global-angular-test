@@ -21,7 +21,7 @@ export class AddUserChallengesAction implements Action {
 
 export class LoadUserChallengesAction implements Action {
   public readonly type = LOAD_USER_CHALLENGES;
-  constructor(public payload: UserChallenge[]) {}
+  constructor() {}
 }
 
 export class LoadUserChallengesSuccessAction implements Action {

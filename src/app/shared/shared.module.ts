@@ -5,12 +5,12 @@ import { FooterComponent } from './footer/footer.component';
 import { MdMenuModule, MdButtonModule } from '@angular/material';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		MdButtonModule,
-		MdMenuModule
-	],
-	declarations: [NavbarComponent, FooterComponent],
-	exports: [NavbarComponent, FooterComponent]
+  imports: [
+    CommonModule,
+    MdButtonModule,
+    MdMenuModule
+  ],
+  declarations: [ NavbarComponent, FooterComponent ],
+  exports: [ NavbarComponent, FooterComponent ]
 })
 export class SharedModule { }

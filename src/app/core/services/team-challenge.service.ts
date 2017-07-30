@@ -11,4 +11,14 @@ export class TeamChallengeService {
     private config: ConfigService,
   ) { }
 
+  /**
+   * getTeamChallenges
+   */
+  public getTeamChallenges() {
+    const uri = this.config.apiUri + 'assets/fake-data/TeamChallenges.json';
+
+    return this.http
+      .get(uri)
+      .map(res => res.json().results || []);
+  }
 }
