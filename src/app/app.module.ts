@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { environment } from '../environments/environment';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import {
@@ -23,7 +24,7 @@ import { AppReducers } from './app.reducer';
     BrowserAnimationsModule,
 
     StoreModule.forRoot(AppReducers),
-    StoreDevtoolsModule.instrument(),
+    // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
 
     SharedModule,
 

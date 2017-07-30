@@ -1,4 +1,4 @@
-import { compose } from '@ngrx/store';
+import { compose, ActionReducerMap } from '@ngrx/store';
 import {
   TeamChallengeState,
   UserChallengeState,
@@ -11,7 +11,7 @@ export interface AppState {
   userChallenges: UserChallengeState;
 }
 
-export const AppReducers = {
+export const AppReducers: ActionReducerMap<AppState> = {
   teamChallenges: teamChallengeReducer,
   userChallenges: userChallengeReducer,
 };
