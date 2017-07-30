@@ -1,3 +1,4 @@
+// Basic types
 interface ListStateByNumber<T> {
   [key: number]: T
 }

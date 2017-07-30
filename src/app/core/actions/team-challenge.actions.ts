@@ -4,10 +4,12 @@ import { TeamChallenge } from '..';
 
 export const ADD_TEAM_CHALLENGE = '[TeamChallenge] Add';
 export const ADD_TEAM_CHALLENGES = '[TeamChallenge] AddAll';
+export const UPDATE_TEAM_CHALLENGE = '[TeamChallenge] Update';
+
+// Async actions
 export const LOAD_TEAM_CHALLENGES = '[TeamChallenge] LoadAll';
 export const LOAD_TEAM_CHALLENGES_SUCCESS = '[TeamChallenge] LoadAllSuccess';
 export const LOAD_TEAM_CHALLENGES_FAILURE = '[TeamChallenge] LoadAllFailure';
-export const UPDATE_TEAM_CHALLENGE = '[TeamChallenge] Update';
 
 export class AddTeamChallengeAction implements Action {
   public readonly type = ADD_TEAM_CHALLENGE;
