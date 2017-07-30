@@ -4,10 +4,12 @@ import { UserChallenge } from '..';
 
 export const ADD_USER_CHALLENGE = '[UserChallenge] Add';
 export const ADD_USER_CHALLENGES = '[UserChallenge] AddAll';
+export const UPDATE_USER_CHALLENGE = '[UserChallenge] Update';
+
+// Async actions
 export const LOAD_USER_CHALLENGES = '[UserChallenge] LoadAll';
 export const LOAD_USER_CHALLENGES_SUCCESS = '[UserChallenge] LoadAllSuccess';
 export const LOAD_USER_CHALLENGES_FAILURE = '[UserChallenge] LoadAllFailure';
-export const UPDATE_USER_CHALLENGE = '[UserChallenge] Update';
 
 export class AddUserChallengeAction implements Action {
   public readonly type = ADD_USER_CHALLENGE;

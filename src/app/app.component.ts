@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { AppState } from '.';
+import {
+  AppState,
+  TeamChallengeService,
+  LoadTeamChallengesAction,
+  LoadUserChallengesAction,
+} from '.';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +15,9 @@ import { AppState } from '.';
 })
 export class AppComponent {
   constructor(
-    public store: Store<AppState>,
+    private store: Store<AppState>,
   ) {
-    this.store.select('teamChallenges')
-      .subscribe((teamChallenges) => console.log(teamChallenges));
+    this.store.dispatch(new LoadTeamChallengesAction);
+    this.store.dispatch(new LoadUserChallengesAction);
   }
 }
