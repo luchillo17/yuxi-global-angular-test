@@ -1,16 +1,45 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MdMenuModule,
+  MdCardModule,
+  MdButtonModule,
+  MdToolbarModule,
+  MdGridListModule,
+} from '@angular/material';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { MdMenuModule, MdButtonModule } from '@angular/material';
+
+const SHARED_MODULES = [
+  CommonModule,
+  BrowserModule,
+  BrowserAnimationsModule,
+
+  MdMenuModule,
+  MdCardModule,
+  MdButtonModule,
+  MdToolbarModule,
+  MdGridListModule,
+];
+
+const SHARED_COMPONENTS = [
+  NavbarComponent,
+  FooterComponent,
+];
 
 @NgModule({
   imports: [
-    CommonModule,
-    MdButtonModule,
-    MdMenuModule
+    ...SHARED_MODULES
   ],
-  declarations: [ NavbarComponent, FooterComponent ],
-  exports: [ NavbarComponent, FooterComponent ]
+  declarations: [
+    ...SHARED_COMPONENTS
+  ],
+  exports: [
+    ...SHARED_MODULES,
+    ...SHARED_COMPONENTS,
+  ],
 })
 export class SharedModule { }

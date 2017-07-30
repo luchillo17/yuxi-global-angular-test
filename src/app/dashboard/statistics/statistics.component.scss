@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  > app-team-statistics, app-user-statistics {
+    width: 400px;
+    height: 200px;
+    margin: 0px 5px 5px;
+
+    display: flex;
+    align-items: stretch;
+
+    > /deep/ md-card {
+      flex: 1;
+      padding: 10px;
+      display: flex;
+
+      > .card-section {
+        &:nth-child(1) {
+          flex: 1;
+        }
+        &:nth-child(2) {
+          flex: 2;
+        }
+      }
+    }
+  }
+}

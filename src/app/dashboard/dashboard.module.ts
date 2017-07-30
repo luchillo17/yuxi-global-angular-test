@@ -8,15 +8,22 @@ import {
   UserChallengesComponent,
   TeamChallengesComponent,
 } from '.';
+import { TeamStatisticsComponent } from './statistics/team-statistics/team-statistics.component';
+import { UserStatisticsComponent } from './statistics/user-statistics/user-statistics.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule,
   ],
   declarations: [
     DashboardComponent,
     StatisticsComponent,
     ChallengesComponent,
+
+    TeamStatisticsComponent,
+    UserStatisticsComponent,
+
     UserChallengesComponent,
     TeamChallengesComponent,
   ],
