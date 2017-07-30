@@ -24,11 +24,11 @@ import { AppReducers } from './app.reducer';
     BrowserAnimationsModule,
 
     StoreModule.forRoot(AppReducers),
-    // !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
 
     SharedModule,
 
-    CoreModule,
+    CoreModule.forRoot(),
     DashboardModule,
     ChallengesModule,
   ],

@@ -1,10 +1,27 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import {
+  ConfigService,
+  TeamChallengeService,
+  UserChallengeService,
+} from './services';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  declarations: []
+  declarations: [],
 })
-export class CoreModule { }
+export class CoreModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: CoreModule,
+      providers: [
+        ConfigService,
+        TeamChallengeService,
+        UserChallengeService,
+      ],
+    };
+  }
+}
