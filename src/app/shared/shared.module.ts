@@ -10,6 +10,11 @@ import {
   MdToolbarModule,
   MdGridListModule,
 } from '@angular/material';
+import {
+  CovalentSearchModule,
+  CovalentPagingModule,
+  CovalentDataTableModule,
+} from '@covalent/core';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,6 +31,10 @@ const SHARED_MODULES = [
   MdButtonModule,
   MdToolbarModule,
   MdGridListModule,
+
+  CovalentSearchModule,
+  CovalentPagingModule,
+  CovalentDataTableModule,
 
   NgxChartsModule,
 ];

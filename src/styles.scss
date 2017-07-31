@@ -18,6 +18,9 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
 
+// Here goes Covalent platform for utilities and basics styles.
+@import '~@covalent/core/common/platform.css';
+
 // App styles
 .clearfix{
   clear: both;
