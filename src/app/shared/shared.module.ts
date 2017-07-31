@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MdMenuModule,
+  MdTabsModule,
   MdCardModule,
   MdButtonModule,
   MdToolbarModule,
@@ -20,6 +21,7 @@ const SHARED_MODULES = [
   BrowserAnimationsModule,
 
   MdMenuModule,
+  MdTabsModule,
   MdCardModule,
   MdButtonModule,
   MdToolbarModule,
