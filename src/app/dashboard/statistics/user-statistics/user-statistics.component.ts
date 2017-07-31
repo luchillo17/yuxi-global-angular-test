@@ -27,18 +27,28 @@ export class UserStatisticsComponent implements OnInit {
     this.userEntries$ = this.store
       .select(getUserStatistics)
       .map(userEntries => {
-        this.score = userEntries.score;
+        this.score = userEntries.score || 0;
         return [
           {
             name: 'Completed entries',
-            value: userEntries.completed,
+            value: userEntries.completed || 0,
           },
           {
             name: 'Pending entries',
-            value: userEntries.pending,
+            value: userEntries.pending || 0,
           },
         ];
-      });
+      })
+      .startWith([
+        {
+          name: 'Completed entries',
+          value: 0,
+        },
+        {
+          name: 'Pending entries',
+          value: 0,
+        }
+      ]);
   }
 
   ngOnInit() {

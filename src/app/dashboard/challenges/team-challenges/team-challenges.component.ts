@@ -32,7 +32,7 @@ export class TeamChallengesComponent implements OnInit {
     { name: 'userFullName', label: 'Created By', tooltip: 'Created By from userFullName property on TeamChallenge' },
     { name: 'modifiedDate', label: 'Modified', format: v => {
       const date = new Date(v);
-      return `${ date.getFullYear() }-${ date.getMonth() + 1 }/${ date.getDate() }`;
+      return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`;
     }},
   ];
 

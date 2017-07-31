@@ -63,6 +63,6 @@ export const getUserStatistics = createSelector(getUserChallenges, (userChalleng
     pending: 0,
     score: 0,
   });
-  userEntries.score = Math.round(userEntries.score / Object.keys(userChallenges).length);
+  userEntries.score = Math.round(userEntries.score / Object.keys(userChallenges).length || 1);
   return userEntries;
 });
