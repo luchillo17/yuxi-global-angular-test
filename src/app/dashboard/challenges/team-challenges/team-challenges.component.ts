@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { values } from 'lodash';
+
+import {
+  AppState,
+  TeamChallenge,
+  getTeamChallenges,
+} from '../../..';
 
 @Component({
   selector: 'app-team-challenges',
@@ -7,7 +16,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamChallengesComponent implements OnInit {
 
-  constructor() { }
+  public teamChallenges$: Observable<TeamChallenge[]>;
+
+  constructor(
+    public store: Store<AppState>,
+  ) {
+    this.teamChallenges$ = this.store
+      .select(getTeamChallenges)
+      .map(values);
+  }
 
   ngOnInit() {
   }
