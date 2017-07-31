@@ -1,9 +1,10 @@
 import {
   Action,
   ActionReducer,
+  createSelector,
   ActionReducerFactory,
 } from '@ngrx/store';
-import { keyBy } from 'lodash';
+import { keyBy, reduce } from 'lodash';
 
 import {
   TeamChallenge,
@@ -13,6 +14,7 @@ import {
   UPDATE_TEAM_CHALLENGE,
   LOAD_TEAM_CHALLENGES_SUCCESS,
 } from '../';
+import { AppState } from '../../';
 
 export function teamChallengeReducer(state: TeamChallengeState = {}, action: Action): TeamChallengeState {
   let teamChallenge: TeamChallenge;
@@ -44,3 +46,13 @@ export function teamChallengeReducer(state: TeamChallengeState = {}, action: Act
       return state;
   }
 }
+
+export const getTeamChallenges = (state: AppState) => state.teamChallenges;
+
+export const getTeamStatistics = createSelector(getTeamChallenges, (teamChallenges): TeamEntries => {
+  return reduce(teamChallenges, (sum, teamChallenge): TeamEntries => {
+    sum.completed += teamChallenge.numberReviewed;
+    sum.pending += teamChallenge.numberToReview;
+    return sum;
+  }, {completed: 0, pending: 0});
+});

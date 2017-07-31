@@ -9,6 +9,7 @@ import {
   MdToolbarModule,
   MdGridListModule,
 } from '@angular/material';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -23,6 +24,8 @@ const SHARED_MODULES = [
   MdButtonModule,
   MdToolbarModule,
   MdGridListModule,
+
+  NgxChartsModule,
 ];
 
 const SHARED_COMPONENTS = [

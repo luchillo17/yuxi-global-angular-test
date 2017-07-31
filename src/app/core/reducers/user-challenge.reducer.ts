@@ -1,9 +1,10 @@
 import {
   Action,
   ActionReducer,
+  createSelector,
   ActionReducerFactory,
 } from '@ngrx/store';
-import { keyBy } from 'lodash';
+import { keyBy, reduce } from 'lodash';
 
 import {
   UserChallenge,
@@ -13,6 +14,7 @@ import {
   UPDATE_USER_CHALLENGE,
   LOAD_USER_CHALLENGES_SUCCESS,
 } from '../';
+import { AppState } from '../..';
 
 export function userChallengeReducer(state: UserChallengeState = {}, action: Action): UserChallengeState {
   let userChallenge: UserChallenge;
@@ -44,3 +46,23 @@ export function userChallengeReducer(state: UserChallengeState = {}, action: Act
       return state;
   }
 }
+
+export const getUserChallenges = (state: AppState) => state.userChallenges;
+
+export const getUserStatistics = createSelector(getUserChallenges, (userChallenges): UserEntries => {
+  const userEntries = reduce(userChallenges, (sum, userChallenge): UserEntries => {
+    if (userChallenge.completedDate !== null) {
+      sum.completed += 1;
+      sum.score += userChallenge.overallScore;
+    } else {
+      sum.pending += 1;
+    }
+    return sum;
+  }, {
+    completed: 0,
+    pending: 0,
+    score: 0,
+  });
+  userEntries.score = Math.round(userEntries.score / Object.keys(userChallenges).length);
+  return userEntries;
+});

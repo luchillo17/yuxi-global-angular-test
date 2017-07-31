@@ -1,4 +1,25 @@
 <md-card>
-  <div class='card-section'>Testing</div>
-  <div class='card-section'>Testing 2</div>
-</md-card>
+    <div class='card-section'>
+      <h3>Personal status</h3>
+    </div>
+    <div class='card-section'>
+      <div id='score-panel'>
+        <div>
+          Avg Score<br>
+          <span>
+            {{ score }} %
+          </span>
+        </div>
+      </div>
+      <div>
+
+        <ngx-charts-advanced-pie-chart
+        label="Total challenges"
+        legend='true'
+        [scheme]="colorScheme"
+        [results]="userEntries$ | async"
+        >
+        </ngx-charts-advanced-pie-chart>
+      </div>
+    </div>
+  </md-card>
