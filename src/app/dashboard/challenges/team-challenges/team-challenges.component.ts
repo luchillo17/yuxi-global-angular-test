@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import {
+  TdDataTableService,
+  ITdDataTableColumn,
+  TdDataTableSortingOrder,
+  ITdDataTableSortChangeEvent,
+  IPageChangeEvent,
+} from '@covalent/core';
+import { Subscription } from 'rxjs/Subscription';
 import { values } from 'lodash';
 
 import {
@@ -16,17 +23,76 @@ import {
 })
 export class TeamChallengesComponent implements OnInit {
 
-  public teamChallenges$: Observable<TeamChallenge[]>;
+  public teamChallenges$: Subscription;
+
+  // Test
+  public data = [];
+  columns: ITdDataTableColumn[] = [
+    { name: 'name', label: 'Title', tooltip: 'Title from name property on TeamChallenge' },
+    { name: 'userFullName', label: 'Created By', tooltip: 'Created By from userFullName property on TeamChallenge' },
+    { name: 'modifiedDate', label: 'Modified', format: v => {
+      const date = new Date(v);
+      return `${ date.getFullYear() }-${ date.getMonth() + 1 }/${ date.getDate() }`;
+    }},
+  ];
+
+  public filteredData: any[] = this.data;
+  public filteredTotal: number = this.data.length;
+
+  public searchTerm = '';
+  public fromRow = 1;
+  public pageSize = 5;
+  public currentPage = 1;
+  public sortBy = 'name';
+  public sortOrder: TdDataTableSortingOrder = TdDataTableSortingOrder.Descending;
 
   constructor(
     public store: Store<AppState>,
+    private _dataTableService: TdDataTableService,
   ) {
     this.teamChallenges$ = this.store
       .select(getTeamChallenges)
-      .map(values);
+      .map(values)
+      .subscribe((teamChallenges) => {
+        this.data = teamChallenges;
+        this.filter();
+      });
   }
 
   ngOnInit() {
   }
 
+  sort(sortEvent: ITdDataTableSortChangeEvent): void {
+    this.sortBy = sortEvent.name;
+    this.sortOrder = sortEvent.order;
+    this.filter();
+  }
+
+  search(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+    this.filter();
+  }
+
+  page(pagingEvent: IPageChangeEvent): void {
+    this.fromRow = pagingEvent.fromRow;
+    this.currentPage = pagingEvent.page;
+    this.pageSize = pagingEvent.pageSize;
+    this.filter();
+  }
+
+  filter(): void {
+    let newData: any[] = this.data;
+    const excludedColumns: string[] = this.columns
+    .filter((column: ITdDataTableColumn) => {
+      return ((column.filter === undefined && column.hidden === true) ||
+              (column.filter !== undefined && column.filter === false));
+    }).map((column: ITdDataTableColumn) => {
+      return column.name;
+    });
+    newData = this._dataTableService.filterData(newData, this.searchTerm, true, excludedColumns);
+    this.filteredTotal = newData.length;
+    newData = this._dataTableService.sortData(newData, this.sortBy, this.sortOrder);
+    newData = this._dataTableService.pageData(newData, this.fromRow, this.currentPage * this.pageSize);
+    this.filteredData = newData;
+  }
 }
