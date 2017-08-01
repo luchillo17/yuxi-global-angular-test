@@ -21,22 +21,25 @@ import {
 @Component({
   selector: 'app-team-challenges',
   templateUrl: './team-challenges.component.html',
-  styleUrls: ['./team-challenges.component.scss']
+  styleUrls: [ './team-challenges.component.scss' ]
 })
 export class TeamChallengesComponent implements OnInit {
 
   public userEntries$: Observable<UserEntries>;
   public teamChallenges$: Subscription;
 
-  // Test
+  // Table config
   public data = [];
   public columns: ITdDataTableColumn[] = [
     { name: 'name', label: 'Title', tooltip: 'Title from name property on TeamChallenge' },
     { name: 'userFullName', label: 'Created By', tooltip: 'Created By from userFullName property on TeamChallenge' },
-    { name: 'modifiedDate', label: 'Modified', format: v => {
-      const date = new Date(v);
-      return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`;
-    }},
+    {
+      name: 'modifiedDate', label: 'Modified', tooltip: 'Modified from userFullName property on TeamChallenge',
+      format(v) {
+        const date = new Date(v);
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      }
+    },
     { name: 'numberInvited', label: 'Invited', tooltip: 'Invited from numberInvited property on TeamChallenge' },
     { name: 'numberOfEntries', label: 'Entries', tooltip: 'Entries from numberOfEntries property on TeamChallenge' },
     { name: 'numberToReview', label: 'To Review', tooltip: 'To Review from numberToReview property on TeamChallenge' },
@@ -54,7 +57,7 @@ export class TeamChallengesComponent implements OnInit {
 
   constructor(
     public store: Store<AppState>,
-    private _dataTableService: TdDataTableService,
+    private dataTableService: TdDataTableService,
   ) {
     this.userEntries$ = this.store
       .select(getUserStatistics);
@@ -78,8 +81,8 @@ export class TeamChallengesComponent implements OnInit {
   sort(sortEvent: ITdDataTableSortChangeEvent): void {
     if (this.sortBy === sortEvent.name) {
       this.sortOrder = sortEvent.order === TdDataTableSortingOrder.Ascending ?
-      TdDataTableSortingOrder.Descending :
-      TdDataTableSortingOrder.Ascending;
+        TdDataTableSortingOrder.Descending :
+        TdDataTableSortingOrder.Ascending;
     }
     this.sortBy = sortEvent.name;
     this.filter();
@@ -100,16 +103,16 @@ export class TeamChallengesComponent implements OnInit {
   filter(): void {
     let newData: any[] = this.data;
     const excludedColumns: string[] = this.columns
-    .filter((column: ITdDataTableColumn) => {
-      return ((column.filter === undefined && column.hidden === true) ||
-              (column.filter !== undefined && column.filter === false));
-    }).map((column: ITdDataTableColumn) => {
-      return column.name;
-    });
-    newData = this._dataTableService.filterData(newData, this.searchTerm, true, excludedColumns);
+      .filter((column: ITdDataTableColumn) => {
+        return ((column.filter === undefined && column.hidden === true) ||
+          (column.filter !== undefined && column.filter === false));
+      }).map((column: ITdDataTableColumn) => {
+        return column.name;
+      });
+    newData = this.dataTableService.filterData(newData, this.searchTerm, true, excludedColumns);
     this.filteredTotal = newData.length;
-    newData = this._dataTableService.sortData(newData, this.sortBy, this.sortOrder);
-    newData = this._dataTableService.pageData(newData, this.fromRow, this.currentPage * this.pageSize);
+    newData = this.dataTableService.sortData(newData, this.sortBy, this.sortOrder);
+    newData = this.dataTableService.pageData(newData, this.fromRow, this.currentPage * this.pageSize);
     this.filteredData = newData;
   }
 }

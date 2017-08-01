@@ -16,8 +16,7 @@
   </div>
 </div>
 <md-divider></md-divider>
-<table td-data-table
-  #dataTable
+<table td-data-table #dataTable
 >
 
   <th td-data-table-column
@@ -121,9 +120,11 @@
   </tr>
 
 </table>
+
 <div class="md-padding" *ngIf="!filteredData.length" layout="row" layout-align="center center">
   <h3>No results to display.</h3>
 </div>
+
 <td-paging-bar #pagingBar [pageSizes]="[5, 10, 15, 20]" [total]="filteredTotal" (change)="page($event)">
   <span td-paging-bar-label hide-xs>Row per page:</span>
   {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>

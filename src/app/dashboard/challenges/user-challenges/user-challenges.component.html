@@ -1,3 +1,65 @@
-<p>
-  user-challenges works!
-</p>
+<div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+  <span *ngIf="!searchBox2.searchVisible" class="push-left-sm">
+        <span class="md-title">My Challenges</span>
+  </span>
+  <td-search-box #searchBox2 backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)" flex>
+  </td-search-box>
+  <div class='search-side-panel'>
+    <div>To Be Completed:
+      <md-chip color="primary" selected="true">
+          {{(userEntries$ | async).pending}}
+      </md-chip>
+    </div>
+    <button md-button md-raised-button color='primary'>
+      New Challenge
+    </button>
+  </div>
+</div>
+<md-divider></md-divider>
+<td-data-table #dataTable
+  [data]="filteredData"
+  [columns]="columns"
+  [sortable]="true"
+  [sortBy]="sortBy"
+  [sortOrder]="sortOrder"
+  (sortChange)="sort($event)">
+
+  <ng-template tdDataTableTemplate="createdBy" let-row='row'>
+    {{ row['challengerFirstName'] }} {{ row['challengerLastName'] }}
+  </ng-template>
+
+  <ng-template tdDataTableTemplate="overallScore" let-value="value">
+    <div *ngIf="value; else noEntries">
+      {{value}}
+    </div>
+    <ng-template #noEntries>-</ng-template>
+  </ng-template>
+
+  <ng-template tdDataTableTemplate="modifiedDate" let-value="value">
+    {{value | date:'y-M-d'}}
+  </ng-template>
+  <ng-template tdDataTableTemplate="completedDate"
+    let-value="value"
+    let-row='row'
+  >
+    <div *ngIf="value; else nullDate">
+      {{value | date:'y-M-d'}}
+    </div>
+    <ng-template #nullDate >
+      <button md-button md-raised-button color='primary'
+        (click)="completeChallenge(row)"
+      >
+        Complete Now
+      </button>
+    </ng-template>
+  </ng-template>
+
+</td-data-table>
+
+<div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+  <h3>No results to display.</h3>
+</div>
+
+<td-paging-bar #pagingBar [pageSizes]="[5, 10, 15, 20]" [total]="filteredTotal" (change)="page($event)">
+  <span td-paging-bar-label hide-xs>Row per page:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+</td-paging-bar>
