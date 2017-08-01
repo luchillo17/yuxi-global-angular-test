@@ -1,4 +1,5 @@
 # Yuxi Global - Angular Test
+GitHub Pages url: https://luchillo17.github.io/yuxi-global-angular-test/
 
 ## Additional dependencies
 
