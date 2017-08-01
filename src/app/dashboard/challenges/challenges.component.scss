@@ -2,8 +2,16 @@
   md-card {
     margin: 0 8px 8px;
     padding: 10px;
-    /deep/ md-chip {
-      border-radius: 10px;
+    /deep/ {
+      .search-side-panel {
+        display: flex;
+        > div {
+          margin-right: 5px;
+        }
+      }
+      md-chip {
+        border-radius: 10px;
+      }
     }
   }
 }
