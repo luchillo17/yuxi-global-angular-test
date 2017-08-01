@@ -71,6 +71,10 @@ export class TeamChallengesComponent implements OnInit {
   ngOnInit() {
   }
 
+  ignoreClickEvent(e: Event) {
+    e.cancelBubble = true;
+  }
+
   sort(sortEvent: ITdDataTableSortChangeEvent): void {
     if (this.sortBy === sortEvent.name) {
       this.sortOrder = sortEvent.order === TdDataTableSortingOrder.Ascending ?

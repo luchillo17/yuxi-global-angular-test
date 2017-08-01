@@ -72,11 +72,50 @@
         [class.mat-accent]="true"
         [mdMenuTriggerFor]="menu"
       >
-        <i class="material-icons">more_horiz</i>
+        <md-icon>more_horiz</md-icon>
       </button>
-      <md-menu #menu="mdMenu">
-        <button md-menu-item>Item 1</button>
-        <button md-menu-item>Item 2</button>
+      <md-menu #menu="mdMenu" class="team-challenge-actions-menu">
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-trophy" aria-hidden="true"></i>
+            <span>View Leaderboard</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span>Send Participant Reminder</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span>Send Reviewer Reminder</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-clipboard" aria-hidden="true"></i>
+            <span>Coy Challenge</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+            <span>Edit Challenge</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span>Delete Challenge</span>
+          </button>
+        </div>
+        <div class='mat-menu-item'>
+          <md-checkbox (click)="ignoreClickEvent($event)">
+            Email me when an entry is submitted
+          </md-checkbox>
+        </div>
       </md-menu>
     </td>
   </tr>
