@@ -14,6 +14,28 @@
   [sortBy]="sortBy"
   [sortOrder]="sortOrder"
   (sortChange)="sort($event)">
+
+
+  <ng-template tdDataTableTemplate="numberInvited" let-value="value">
+    <div *ngIf="value; else noEntries">
+      {{value}}
+    </div>
+    <ng-template #noEntries>-</ng-template>
+  </ng-template>
+  <ng-template tdDataTableTemplate="numberOfEntries" let-value="value">
+    <div *ngIf="value; else noEntries">
+      {{value}}
+    </div>
+    <ng-template #noEntries>-</ng-template>
+  </ng-template>
+  <ng-template tdDataTableTemplate="numberToReview" let-value="value">
+    <md-chip-list *ngIf="value; else noEntries">
+      <md-chip color="primary" selected="true">
+        {{value}}
+      </md-chip>
+    </md-chip-list>
+    <ng-template #noEntries>-</ng-template>
+  </ng-template>
 </td-data-table>
 <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
   <h3>No results to display.</h3>

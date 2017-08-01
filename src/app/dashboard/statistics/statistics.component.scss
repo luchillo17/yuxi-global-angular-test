@@ -1,12 +1,11 @@
 :host {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   > app-team-statistics, app-user-statistics {
     width: 410px;
     height: 210px;
-    margin: 0px 5px 5px;
 
     display: flex;
     align-items: stretch;

@@ -27,13 +27,16 @@ export class TeamChallengesComponent implements OnInit {
 
   // Test
   public data = [];
-  columns: ITdDataTableColumn[] = [
+  public columns: ITdDataTableColumn[] = [
     { name: 'name', label: 'Title', tooltip: 'Title from name property on TeamChallenge' },
     { name: 'userFullName', label: 'Created By', tooltip: 'Created By from userFullName property on TeamChallenge' },
     { name: 'modifiedDate', label: 'Modified', format: v => {
       const date = new Date(v);
       return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`;
     }},
+    { name: 'numberInvited', label: 'Invited', tooltip: 'Invited from numberInvited property on TeamChallenge' },
+    { name: 'numberOfEntries', label: 'Entries', tooltip: 'Entries from numberOfEntries property on TeamChallenge' },
+    { name: 'numberToReview', label: 'To Review', tooltip: 'To Review from numberToReview property on TeamChallenge' },
   ];
 
   public filteredData: any[] = this.data;
