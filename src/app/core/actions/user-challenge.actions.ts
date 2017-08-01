@@ -39,5 +39,5 @@ export class LoadUserChallengesFailureAction implements Action {
 
 export class UpdateUserChallengeAction implements Action {
   public readonly type = UPDATE_USER_CHALLENGE;
-  constructor(public userChallenge: UserChallenge) {}
+  constructor(public payload: UserChallenge) {}
 }
