@@ -1,6 +1,6 @@
 {
   "name": "yuxi-global-angular-test",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -30,6 +30,7 @@
     "@swimlane/ngx-charts": "^6.0.1",
     "core-js": "^2.4.1",
     "d3": "^4.10.0",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "rxjs": "^5.4.1",
     "web-animations-js": "^2.3.1",

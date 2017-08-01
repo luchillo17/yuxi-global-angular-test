@@ -8,12 +8,14 @@ import {
   IPageChangeEvent,
 } from '@covalent/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import { values } from 'lodash';
 
 import {
   AppState,
   TeamChallenge,
   getTeamChallenges,
+  getUserStatistics,
 } from '../../..';
 
 @Component({
@@ -23,6 +25,7 @@ import {
 })
 export class TeamChallengesComponent implements OnInit {
 
+  public userEntries$: Observable<UserEntries>;
   public teamChallenges$: Subscription;
 
   // Test
@@ -53,6 +56,9 @@ export class TeamChallengesComponent implements OnInit {
     public store: Store<AppState>,
     private _dataTableService: TdDataTableService,
   ) {
+    this.userEntries$ = this.store
+      .select(getUserStatistics);
+
     this.teamChallenges$ = this.store
       .select(getTeamChallenges)
       .map(values)
@@ -65,9 +71,17 @@ export class TeamChallengesComponent implements OnInit {
   ngOnInit() {
   }
 
+  ignoreClickEvent(e: Event) {
+    e.cancelBubble = true;
+  }
+
   sort(sortEvent: ITdDataTableSortChangeEvent): void {
+    if (this.sortBy === sortEvent.name) {
+      this.sortOrder = sortEvent.order === TdDataTableSortingOrder.Ascending ?
+      TdDataTableSortingOrder.Descending :
+      TdDataTableSortingOrder.Ascending;
+    }
     this.sortBy = sortEvent.name;
-    this.sortOrder = sortEvent.order;
     this.filter();
   }
 

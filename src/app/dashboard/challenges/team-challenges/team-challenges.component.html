@@ -4,40 +4,124 @@
   </span>
   <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)" flex>
   </td-search-box>
+  <div class='search-side-panel'>
+    <div>To Be Completed:
+      <md-chip color="primary" selected="true">
+          {{(userEntries$ | async).pending}}
+      </md-chip>
+    </div>
+    <button md-button md-raised-button color='primary'>
+      New Challenge
+    </button>
+  </div>
 </div>
 <md-divider></md-divider>
-<td-data-table
+<table td-data-table
   #dataTable
-  [data]="filteredData"
-  [columns]="columns"
-  [sortable]="true"
-  [sortBy]="sortBy"
-  [sortOrder]="sortOrder"
-  (sortChange)="sort($event)">
+>
 
+  <th td-data-table-column
+    *ngFor="let column of columns"
+    [name]="column.name"
+    [numeric]="column.numeric"
+    [active]="true"
+    [sortable]="true"
+    [sortOrder]="sortOrder"
+    (sortChange)="sort($event)"
+  >
+    {{column.label}}
+  </th>
+  <th td-data-table-column
+    class='text-center'
+    [active]="true"
+  >
+    Actions
+  </th>
 
-  <ng-template tdDataTableTemplate="numberInvited" let-value="value">
-    <div *ngIf="value; else noEntries">
-      {{value}}
-    </div>
-    <ng-template #noEntries>-</ng-template>
-  </ng-template>
-  <ng-template tdDataTableTemplate="numberOfEntries" let-value="value">
-    <div *ngIf="value; else noEntries">
-      {{value}}
-    </div>
-    <ng-template #noEntries>-</ng-template>
-  </ng-template>
-  <ng-template tdDataTableTemplate="numberToReview" let-value="value">
-    <md-chip-list *ngIf="value; else noEntries">
-      <md-chip color="primary" selected="true">
-        {{value}}
-      </md-chip>
-    </md-chip-list>
-    <ng-template #noEntries>-</ng-template>
-  </ng-template>
-</td-data-table>
-<div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+  <tr td-data-table-row *ngFor="let row of filteredData">
+    <td td-data-table-cell *ngFor="let column of columns"
+      [numeric]="column.numeric"
+      [ngSwitch]="column.name"
+    >
+      <span *ngSwitchCase="'numberInvited'">
+        <div *ngIf="row[column.name]; else noEntries">
+          {{row[column.name]}}
+        </div>
+        <ng-template #noEntries>-</ng-template>
+      </span>
+      <span *ngSwitchCase="'numberOfEntries'">
+        <div *ngIf="row[column.name]; else noEntries">
+          {{row[column.name]}}
+        </div>
+        <ng-template #noEntries>-</ng-template>
+      </span>
+      <span *ngSwitchCase="'numberToReview'">
+        <md-chip-list *ngIf="row[column.name]; else noEntries">
+          <md-chip color="primary" selected="true">
+            {{row[column.name]}}
+          </md-chip>
+        </md-chip-list>
+        <ng-template #noEntries>-</ng-template>
+      </span>
+      <span *ngSwitchDefault>
+        {{column.format ? column.format(row[column.name]) : row[column.name]}}
+      </span>
+    </td>
+    <td td-data-table-cell class='text-center'>
+      <button md-button md-raised-button color='primary'
+        [class.mat-accent]="true"
+        [mdMenuTriggerFor]="menu"
+      >
+        <md-icon>more_horiz</md-icon>
+      </button>
+      <md-menu #menu="mdMenu" class="team-challenge-actions-menu">
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-trophy" aria-hidden="true"></i>
+            <span>View Leaderboard</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span>Send Participant Reminder</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span>Send Reviewer Reminder</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-clipboard" aria-hidden="true"></i>
+            <span>Coy Challenge</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-pencil-square" aria-hidden="true"></i>
+            <span>Edit Challenge</span>
+          </button>
+        </div>
+        <div md-menu-item>
+          <button md-button color='primary'>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            <span>Delete Challenge</span>
+          </button>
+        </div>
+        <div class='mat-menu-item'>
+          <md-checkbox (click)="ignoreClickEvent($event)">
+            Email me when an entry is submitted
+          </md-checkbox>
+        </div>
+      </md-menu>
+    </td>
+  </tr>
+
+</table>
+<div class="md-padding" *ngIf="!filteredData.length" layout="row" layout-align="center center">
   <h3>No results to display.</h3>
 </div>
 <td-paging-bar #pagingBar [pageSizes]="[5, 10, 15, 20]" [total]="filteredTotal" (change)="page($event)">

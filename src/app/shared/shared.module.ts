@@ -6,10 +6,12 @@ import {
   MdMenuModule,
   MdTabsModule,
   MdCardModule,
+  MdIconModule,
   MdChipsModule,
   MdButtonModule,
   MdToolbarModule,
   MdGridListModule,
+  MdCheckboxModule,
 } from '@angular/material';
 import {
   CovalentSearchModule,
@@ -29,10 +31,12 @@ const SHARED_MODULES = [
   MdMenuModule,
   MdTabsModule,
   MdCardModule,
+  MdIconModule,
   MdChipsModule,
   MdButtonModule,
   MdToolbarModule,
   MdGridListModule,
+  MdCheckboxModule,
 
   CovalentSearchModule,
   CovalentPagingModule,
