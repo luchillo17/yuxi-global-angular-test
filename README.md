@@ -1,8 +1,14 @@
 # Yuxi Global - Angular Test
 
+## Additional dependencies
+
+The following dependencies were added for a reason:
+* [X] **@ngrx:** To deal with the state of the app, as well as side effects like async data requests to servers.
+* [X] **Covalent:** Mostly because it constructs over `@angular/material`, and it has charts support.
+
 ## 1. Introduction
 
-In this test you will be asked to build a set of functionalities in Angular. You will be provided a set of **mockups** and a **base project** we have already setup for you in this repository. 
+In this test you will be asked to build a set of functionalities in Angular. You will be provided a set of **mockups** and a **base project** we have already setup for you in this repository.
 
 > We will review your submission following the evaluation criteria, make sure you don't miss it!
 
@@ -87,7 +93,7 @@ You are free to use third-party libraries as long as you have a good reason for 
 
 # Data Layer
 
-The following is a description of every single data shown in the interface 
+The following is a description of every single data shown in the interface
 
 ## 1. Dashboard Summary
 

@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  > app-team-statistics, app-user-statistics {
+    width: 410px;
+    height: 210px;
+
+    display: flex;
+    align-items: stretch;
+
+    > /deep/ md-card {
+      flex: 1;
+      padding: 10px;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+
+      h3 {
+        margin: 0;
+      }
+
+      .advanced-pie-legend .legend-items-container .legend-items {
+        overflow: visible;
+      }
+    }
+  }
+}

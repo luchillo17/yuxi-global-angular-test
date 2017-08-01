@@ -1,0 +1,9 @@
+:host {
+  md-card {
+    margin: 0 8px 8px;
+    padding: 10px;
+    /deep/ md-chip {
+      border-radius: 10px;
+    }
+  }
+}

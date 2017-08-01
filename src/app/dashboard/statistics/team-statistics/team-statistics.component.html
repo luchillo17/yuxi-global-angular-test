@@ -1,0 +1,13 @@
+<md-card>
+  <div class='card-section'>
+    <h3>Entries to review</h3>
+  </div>
+  <div class='card-section'>
+    <ngx-charts-advanced-pie-chart
+      label="Total entries"
+      [scheme]="colorScheme"
+      [results]="teamEntries$ | async"
+    >
+    </ngx-charts-advanced-pie-chart>
+  </div>
+</md-card>
