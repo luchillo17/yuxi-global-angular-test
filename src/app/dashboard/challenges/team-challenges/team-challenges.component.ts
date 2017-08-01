@@ -66,8 +66,12 @@ export class TeamChallengesComponent implements OnInit {
   }
 
   sort(sortEvent: ITdDataTableSortChangeEvent): void {
+    if (this.sortBy === sortEvent.name) {
+      this.sortOrder = sortEvent.order === TdDataTableSortingOrder.Ascending ?
+      TdDataTableSortingOrder.Descending :
+      TdDataTableSortingOrder.Ascending;
+    }
     this.sortBy = sortEvent.name;
-    this.sortOrder = sortEvent.order;
     this.filter();
   }
 
